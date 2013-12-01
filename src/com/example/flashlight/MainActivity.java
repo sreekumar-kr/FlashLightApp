@@ -4,6 +4,7 @@ import com.mashinga.hello.R;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.os.Bundle;
@@ -26,9 +27,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		setContentView(R.layout.activity_main);
 
 		toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
+		toggleButton.setTextColor(Color.GRAY);
 		toggleButton.setOnClickListener(this);
 	}
 
@@ -47,8 +50,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		if (id == R.id.toggleButton) {
 			if (toggleButton.isChecked()) {
 				flashLightOn();
+				toggleButton.setTextColor(Color.GREEN);
 			} else {
 				flashLightOff();
+				toggleButton.setTextColor(Color.GRAY);
+
 			}
 		}
 	}
@@ -63,6 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 				p.setFlashMode(Parameters.FLASH_MODE_TORCH);
 				cam.setParameters(p);
 				cam.startPreview();
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
